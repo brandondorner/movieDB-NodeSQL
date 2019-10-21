@@ -1,10 +1,27 @@
 const express = require('express');
 const mysql = require('mysql')
 
-
 const app = express()
 
+//setting up sql connection, then connecting
+const db = mysql.createConnection({
+    host:'localhost',
+    user: 'testuser',
+    password:'password123',
+    database:'movies'
+})
 
+db.connect()
+
+app.get('/movies', (req, res) => {
+    //creating query
+    const sql = 'SELECT * FROM movies';
+
+    db.query(sql, (err, result) => {
+        if (err) throw err; 
+        res.send(result);
+    });
+} ); 
 
 app.listen('3000', () => {
     console.log('server running on port 3000')
