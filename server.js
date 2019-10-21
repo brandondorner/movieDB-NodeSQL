@@ -19,7 +19,7 @@ app.get('/movies', (req, res) => {
 
     db.query(sql, (err, result) => {
         if (err) throw err; 
-        res.send(result);
+        res.render('index', {result: result});
     });
 } ); 
 
