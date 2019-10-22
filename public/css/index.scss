@@ -13,6 +13,15 @@ body{
         }
         .results{
             border: blue solid 1px;
+            table{
+                #title-head{
+                    font-size: 170%;
+                }
+            }
+            table, tr, th{
+                border: solid 1px black;
+                border-spacing: 0;
+            }
         }
     }
 }

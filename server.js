@@ -15,13 +15,19 @@ db.connect()
 
 app.get('/movies', (req, res) => {
     //creating query
-    const sql = 'SELECT * FROM movies';
+    const sql = 'SELECT * FROM movies LIMIT 500';
 
-    db.query(sql, (err, result) => {
+    db.query(sql, (err, results) => {
         if (err) throw err; 
-        res.render('index', {result: result});
+        res.render('index', {results: results});
     });
 } ); 
+
+//handle form query
+app.get('/movies?sort-by=:sort', (req, res) => {
+    console.log(req.param[sort])
+    const sql = `SELECT * FROM movies SORT BY `
+})
 
 app.listen('3000', () => {
     console.log('server running on port 3000')

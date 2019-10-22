@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Database</title>
+    <script src="./script.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/index.css" >
 </head>
 <body>
@@ -13,9 +14,35 @@
             <h1 class="title">Movie Database</h1>
             <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate eos dolores aperiam veniam quasi.</p>
         </div>
-        <div class="query-container"></div>
-        <div class="results"></div>
-        <p><%= JSON.stringify(result) %></p>
+        <div class="query-container">
+            <form action="/movies" method="POST">
+                <label>Sort By:</label>
+                <select name="sort-by">
+                    <option value="title">Title</option>
+                    <option value="genre">Genres</option>
+                    <option value="year">Year</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="results">
+            <table>
+                <tr id='title-head'>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                </tr>
+                <% results.forEach(movie => { %>
+                    <tr>
+                        <th> <%= movie.title %></th>
+                        <th> <%= movie.genres %></th>
+                        <th> <%= movie.movie_year %></th>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+        <!-- <p><%= JSON.stringify(results) %></p> -->
+        
     </div>
 </body>
 </html>

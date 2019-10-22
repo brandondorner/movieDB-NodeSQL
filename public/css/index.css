@@ -27,4 +27,13 @@ body .main .query-container {
 body .main .results {
   border: blue solid 1px;
 }
+
+body .main .results table #title-head {
+  font-size: 170%;
+}
+
+body .main .results table, body .main .results tr, body .main .results th {
+  border: solid 1px black;
+  border-spacing: 0;
+}
 /*# sourceMappingURL=index.css.map */
