@@ -2,6 +2,9 @@ const express = require('express');
 const mysql = require('mysql')
 
 const app = express()
+//ablility to read incoming data from forms
+app.use(express.urlencoded())
+
 
 //setting up sql connection, then connecting
 const db = mysql.createConnection({
@@ -24,10 +27,16 @@ app.get('/movies', (req, res) => {
 } ); 
 
 //handle form query
-app.get('/movies?sort-by=:sort', (req, res) => {
-    console.log(req.param[sort])
-    const sql = `SELECT * FROM movies SORT BY `
-})
+app.post('/submit', (req, res) => {
+    console.log(req.body)
+    const query = req.body.sortBy
+    const sql = `SELECT * FROM movies ORDER BY ${query} ASC LIMIT 500`
+
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.render('index', {results: results})
+    });
+});
 
 app.listen('3000', () => {
     console.log('server running on port 3000')
