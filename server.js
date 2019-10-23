@@ -16,9 +16,9 @@ const db = mysql.createConnection({
 
 db.connect()
 
-app.get('/movies', (req, res) => {
+app.get('/', (req, res) => {
     //creating query
-    const sql = 'SELECT * FROM movies LIMIT 500';
+    const sql = 'SELECT * FROM movies LIMIT 100';
 
     db.query(sql, (err, results) => {
         if (err) throw err; 
@@ -29,8 +29,17 @@ app.get('/movies', (req, res) => {
 //handle form query
 app.post('/submit', (req, res) => {
     console.log(req.body)
-    const query = req.body.sortBy
-    const sql = `SELECT * FROM movies ORDER BY ${query} ASC LIMIT 500`
+    const sort = req.body.sortBy
+    const limit = req.body.limit
+    const year1 = req.body.year1
+    const year2 = req.body.year2
+
+    const sql = `SELECT * FROM movies
+                WHERE movie_year
+                BETWEEN ${year1} AND ${year2}
+                ORDER BY ${sort} ASC 
+                LIMIT ${limit}
+    `
 
     db.query(sql, (err, results) => {
         if (err) throw err;
