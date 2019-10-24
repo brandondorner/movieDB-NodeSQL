@@ -1,5 +1,7 @@
 const express = require('express');
 const mysql = require('mysql')
+const PORT = process.env.PORT || 3000;
+const server = require('http').Server(app)
 
 const app = express()
 //ablility to read incoming data from forms
@@ -47,8 +49,8 @@ app.post('/submit', (req, res) => {
     });
 });
 
-app.listen('3000', () => {
-    console.log('server running on port 3000')
+server.listen(PORT, () => {
+    console.log(`server running on port ${PORT}`)
 })
 
 //set up express server
